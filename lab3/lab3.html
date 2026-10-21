@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота №3 — Кричун Антон</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .block {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .tree-title {
+            cursor: pointer;
+            font-weight: bold;
+            color: #0066cc;
+        }
+        .tree-list {
+            display: block;
+        }
+        .eng-btn {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <p><a href="../index.html">← На головну сторінку</a></p>
+
+    <h1>Лабораторна робота №3</h1>
+    <p>Студент: Кричун Антон Дмитрович | Варіант: 13 (13 % 10 = 3)</p>
+    <hr>
+
+    
+    <div class="block">
+        <h3>Завдання 1. Розрахунок площі квадрата (Варіант 3: 13 % 10 = 3)</h3>
+        <p>Введіть довжину сторони квадрата (обчислення виконується за допомогою addEventListener):</p>
+        Сторона a: <input type="text" id="square_a" value="4"><br><br>
+        Площа S: <input type="text" id="square_res" readonly style="background-color: #eee;">
+    </div>
+
+   
+    <div class="block">
+        <h3>Завдання 2 та 3. Калькулятор (Простий / Інженерний)</h3>
+        <input type="button" id="toggle_eng_btn" value="Переключити на Інженерний" onclick="toggle_calculator()"><br><br>
+
+        <form name="calc_form">
+            <input type="text" id="calc_display" size="25" readonly><br><br>
+            
+            
+            <span id="eng_section" class="eng-btn">
+                <input type="button" value=" √ " onclick="calc_sqrt()">
+                <input type="button" value=" x² " onclick="calc_sqr()">
+                <input type="button" value=" sin " onclick="calc_sin()"><br><br>
+            </span>
+
+            
+            <input type="button" value=" C " onclick="calc_clear()">
+            <input type="button" value=" +/- " onclick="calc_toggle_sign()">
+            <input type="button" value=" / " onclick="calc_add('/')">
+            <input type="button" value=" * " onclick="calc_add('*')"><br>
+
+            <input type="button" value=" 7 " onclick="calc_add('7')">
+            <input type="button" value=" 8 " onclick="calc_add('8')">
+            <input type="button" value=" 9 " onclick="calc_add('9')">
+            <input type="button" value=" - " onclick="calc_add('-')"><br>
+
+            <input type="button" value=" 4 " onclick="calc_add('4')">
+            <input type="button" value=" 5 " onclick="calc_add('5')">
+            <input type="button" value=" 6 " onclick="calc_add('6')">
+            <input type="button" value=" + " onclick="calc_add('+')"><br>
+
+            <input type="button" value=" 1 " onclick="calc_add('1')">
+            <input type="button" value=" 2 " onclick="calc_add('2')">
+            <input type="button" value=" 3 " onclick="calc_add('3')">
+            <input type="button" value=" = " onclick="calc_eval()"><br>
+
+            <input type="button" value=" 0 " onclick="calc_add('0')">
+            <input type="button" value=" . " onclick="calc_add('.')">
+        </form>
+    </div>
+
+    
+    <div class="block">
+        <h3>Завдання 4. Перегляд зображень (JSON)</h3>
+        <div style="text-align: center; max-width: 320px;">
+            <img id="gallery_img" src="" alt="Зображення галереї" style="width: 300px; height: 200px; border: 1px solid #ccc; object-fit: cover;"><br><br>
+            <input type="button" value="Назад" onclick="prev_image()">
+            <input type="button" value="Вперед" onclick="next_image()">
+        </div>
+    </div>
+
+    
+    <div class="block">
+        <h3>Завдання 5. Ієрархічне дерево (списки)</h3>
+        <p>Натисніть на назву розділу, щоб згорнути/розгорнути:</p>
+        
+        <span class="tree-title" onclick="toggle_tree('fruits_list')">▼ fruits:</span>
+        <ol id="fruits_list" class="tree-list">
+            <li>apple</li>
+            <li>pineapple</li>
+            <li>appricot</li>
+            <li>pear</li>
+            <li>lemon</li>
+        </ol>
+
+        <br>
+        <span class="tree-title" onclick="toggle_tree('veg_list')">▼ vegetables:</span>
+        <ol id="veg_list" class="tree-list">
+            <li>potatoes</li>
+            <li>beetroot</li>
+            <li>carrots</li>
+            <li>pear</li>
+        </ol>
+    </div>
+
+   
+    <div class="block">
+        <h3>Завдання 6. Маніпуляції з DOM (Варіант 3)</h3>
+        
+        
+        <h2 id="subtitle">Заголовок подразділу </h2>
+
+        
+        <label>Поле введення (6.2): </label>
+        <input type="text" id="user-input" value="Початкове значення"><br><br>
+
+        
+        <p id="text-style">Цей текст буде змінено за допомогою JavaScript (Завдання 6.3).</p>
+
+        <br>
+        <input type="button" id="toggle_dom_btn" value="Перейти в кінцевий стан" onclick="toggle_dom_state()">
+    </div>
+
+    <script language="JavaScript">
+        
+        let squareInput = document.getElementById("square_a");
+        let squareRes = document.getElementById("square_res");
+
+        function calculate_square() {
+            let a = parseFloat(squareInput.value);
+            if (!isNaN(a)) {
+                squareRes.value = a * a;
+            } else {
+                squareRes.value = "Введіть число!";
+            }
+        }
+
+        
+        squareInput.addEventListener("input", calculate_square);
+        calculate_square(); 
+
+     
+        let calcDisplay = document.getElementById("calc_display");
+        let isEng = false;
+
+        function calc_add(val) {
+            calcDisplay.value = calcDisplay.value + val;
+        }
+
+        function calc_clear() {
+            calcDisplay.value = "";
+        }
+
+        function calc_toggle_sign() {
+            if (calcDisplay.value != "") {
+                if (calcDisplay.value.charAt(0) == "-") {
+                    calcDisplay.value = calcDisplay.value.substring(1);
+                } else {
+                    calcDisplay.value = "-" + calcDisplay.value;
+                }
+            }
+        }
+
+        function calc_eval() {
+            try {
+                calcDisplay.value = eval(calcDisplay.value);
+            } catch (e) {
+                calcDisplay.value = "Помилка";
+            }
+        }
+
+        function calc_sqrt() {
+            let val = parseFloat(calcDisplay.value);
+            if (!isNaN(val)) calcDisplay.value = Math.sqrt(val);
+        }
+
+        function calc_sqr() {
+            let val = parseFloat(calcDisplay.value);
+            if (!isNaN(val)) calcDisplay.value = val * val;
+        }
+
+        function calc_sin() {
+            let val = parseFloat(calcDisplay.value);
+            if (!isNaN(val)) calcDisplay.value = Math.sin(val);
+        }
+
+        function toggle_calculator() {
+            let engSection = document.getElementById("eng_section");
+            let toggleBtn = document.getElementById("toggle_eng_btn");
+
+            if (!isEng) {
+                engSection.style.display = "inline";
+                toggleBtn.value = "Переключити на Простий";
+                isEng = true;
+            } else {
+                engSection.style.display = "none";
+                toggleBtn.value = "Переключити на Інженерний";
+                isEng = false;
+            }
+        }
+
+       
+        let json_images = '["https://picsum.photos/id/10/300/200", "https://picsum.photos/id/20/300/200", "https://picsum.photos/id/30/300/200", "https://picsum.photos/id/40/300/200"]';
+        let imagesArray = JSON.parse(json_images);
+        let currentImgIndex = 0;
+        let galleryImg = document.getElementById("gallery_img");
+
+        function update_image() {
+            galleryImg.src = imagesArray[currentImgIndex];
+        }
+
+        function next_image() {
+            currentImgIndex++;
+            if (currentImgIndex >= imagesArray.length) {
+                currentImgIndex = 0; 
+            }
+            update_image();
+        }
+
+        function prev_image() {
+            currentImgIndex--;
+            if (currentImgIndex < 0) {
+                currentImgIndex = imagesArray.length - 1; 
+            }
+            update_image();
+        }
+
+        update_image(); 
+
+        
+        function toggle_tree(listId) {
+            let listElem = document.getElementById(listId);
+            if (listElem.style.display === "none") {
+                listElem.style.display = "block";
+            } else {
+                listElem.style.display = "none";
+            }
+        }
+
+       
+        let isFinalState = false;
+
+        function toggle_dom_state() {
+            let subtitle = document.getElementById("subtitle");
+            let userInput = document.getElementById("user-input");
+            let textStyle = document.getElementById("text-style");
+            let toggleDomBtn = document.getElementById("toggle_dom_btn");
+
+            if (!isFinalState) {
+               
+                subtitle.innerHTML = "Заголовок підрозділу <span style='color:red;'>(Важливо!)</span>";
+
+              
+                userInput.value = "Заповнено автоматично";
+
+               
+                textStyle.style.fontSize = "24px";
+                textStyle.style.fontWeight = "bold";
+
+                toggleDomBtn.value = "Перейти в початковий стан";
+                isFinalState = true;
+            } else {
+                
+                subtitle.innerHTML = "Заголовок подразділу";
+                userInput.value = "Початкове значення";
+                textStyle.style.fontSize = "16px";
+                textStyle.style.fontWeight = "normal";
+
+                toggleDomBtn.value = "Перейти в кінцевий стан";
+                isFinalState = false;
+            }
+        }
+    </script>
+
+</body>
+</html>

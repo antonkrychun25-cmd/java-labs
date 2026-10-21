@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота №2 — Кричун Антон</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 4px;
+        }
+    </style>
+    <script language="JavaScript">
+       
+        function clock() {
+            let now = new Date();
+            let year = now.getFullYear();
+            let month = now.getMonth() + 1;
+            let day = now.getDate();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+            if (hours < 10) hours = "0" + hours;
+            if (minutes < 10) minutes = "0" + minutes;
+            if (seconds < 10) seconds = "0" + seconds;
+
+            let resultStr = year + "#" + month + "#" + day + "-" + hours + "#" + minutes + "#" + seconds;
+            clock_form.clock_field.value = resultStr;
+
+            setTimeout("clock()", 1000);
+        }
+
+       
+        function add_val(v) {
+            calc_form.calc_out.value = calc_form.calc_out.value + v;
+        }
+        function clear_val() {
+            calc_form.calc_out.value = "";
+        }
+        function run_calc() {
+            calc_form.calc_out.value = eval(calc_form.calc_out.value);
+        }
+
+       
+        let str_cnt, stb_cnt;
+
+        function fun_table() {
+            str_cnt = parseInt(main_form3.t_str.value);
+            stb_cnt = parseInt(main_form3.t_stb.value);
+
+            let res_str = "<table>\n";
+            for (let i = 1; i <= str_cnt; i++) {
+                res_str += "<tr>\n";
+                for (let j = 1; j <= stb_cnt; j++) {
+                    
+                    let val = 3 * j - 2 * i;
+                    res_str += "<td>";
+                    res_str += "<input type=\"text\" size=\"5\" id=\"_" + i + "_" + j + "\" value=\"" + val + "\">";
+                    res_str += "</td>\n";
+                }
+                res_str += "</tr>\n";
+            }
+            res_str += "</table>";
+            matrix_div.innerHTML = res_str;
+        }
+
+        function fun_calc3() {
+            if (stb_cnt < 3) {
+                alert("Потрібно мінімум 3 стовпці!");
+                return;
+            }
+
+            let sum = 0;
+            for (let i = 1; i <= str_cnt; i++) {
+                let elem_val = parseInt(document.getElementById("_" + i + "_3").value);
+                sum = sum + elem_val;
+            }
+            alert("Варіант 13: Сума елементів 3-го стовпця = " + sum);
+        }
+
+      
+        function test_task4() {
+            console.log("=== Завдання 4 ===");
+            let a = 17, b = 5;
+            let rem = a % b;
+            console.log("a1=" + rem);
+            console.log("a1=", rem);
+            console.log("Чи рівна остача 0? ", (rem == 0));
+
+            let arr = [10, 20, 30];
+            console.log("Значення масиву: %d, %d, %d", arr[0], arr[1], arr[2]);
+            console.log("Перший елемент як рядок: %s", arr[0]);
+            alert("Результати Завдання 4 виведено у консоль (натисніть F12)!");
+        }
+
+        function test_task5() {
+            console.log("=== Завдання 5 ===");
+            console.info("Інформаційне повідомлення (console.info)");
+            console.warn("Попередження (console.warn)");
+            console.error("Помилка (console.error)");
+
+            let student = { name: "Антон", group: "341-Б", variant: 13 };
+            console.dir(student);
+
+            console.time("Час циклу");
+            for (let i = 0; i < 100000; i++) {}
+            console.timeEnd("Час циклу");
+
+            console.assert(13 == 5, "Assert: 13 не дорівнює 5!");
+            alert("Результати Завдання 5 виведено у консоль (натисніть F12)!");
+        }
+
+        
+        function test_task6() {
+            console.log("=== Завдання 6 ===");
+            let names = ["Anna", "Anton", "Bohdan", "Ihor", "Oleg", "Olena", "Dmytro"];
+
+            for (let i = 0; i < names.length; i++) {
+                let first = names[i].charAt(0);
+                if (first == "A" || first == "E" || first == "I" || first == "O" || first == "U") {
+                    console.log("Goodbye " + names[i]);
+                } else {
+                    console.log("Hello " + names[i]);
+                }
+            }
+            alert("Результати Завдання 6 виведено у консоль (натисніть F12)!");
+        }
+
+        function test_task7() {
+            console.log("=== Завдання 7 ===");
+            console.log("Селекція за сумою ASCII-кодів літер (поріг 400):");
+            let names = ["Anna", "Anton", "Bohdan", "Ihor", "Oleg", "Olena", "Dmytro"];
+
+            for (let i = 0; i < names.length; i++) {
+                let sum = 0;
+                for (let j = 0; j < names[i].length; j++) {
+                    sum = sum + names[i].charCodeAt(j);
+                }
+
+                if (sum > 400) {
+                    console.log(names[i] + " (Сума ASCII: " + sum + ") -> Більше за 400");
+                } else {
+                    console.log(names[i] + " (Сума ASCII: " + sum + ") -> Менше або рівно 400");
+                }
+            }
+            alert("Результати Завдання 7 виведено у консоль (натисніть F12)!");
+        }
+    </script>
+</head>
+<body onLoad="clock()">
+
+    
+    <p><a href="../index.html">← На головну сторінку</a></p>
+
+    <h1>Лабораторна робота №2</h1>
+    <p>Студент: Кричун Антон Дмитрович | Варіант: 13</p>
+    <hr>
+
+    <h3>Завдання 1. Годинник та календар</h3>
+    <form name="clock_form">
+        Дата та час (year#moun#day-hour#min#sec):<br>
+        <input type="text" name="clock_field" size="35" readonly>
+    </form>
+    <hr>
+
+    <h3>Завдання 2. Простий калькулятор</h3>
+    <form name="calc_form">
+        <input type="text" name="calc_out" size="20" readonly><br><br>
+        <input type="button" value=" 1 " onClick="add_val('1')">
+        <input type="button" value=" 2 " onClick="add_val('2')">
+        <input type="button" value=" 3 " onClick="add_val('3')">
+        <input type="button" value=" + " onClick="add_val('+')"><br>
+        <input type="button" value=" 4 " onClick="add_val('4')">
+        <input type="button" value=" 5 " onClick="add_val('5')">
+        <input type="button" value=" 6 " onClick="add_val('6')">
+        <input type="button" value=" - " onClick="add_val('-')"><br>
+        <input type="button" value=" 7 " onClick="add_val('7')">
+        <input type="button" value=" 8 " onClick="add_val('8')">
+        <input type="button" value=" 9 " onClick="add_val('9')">
+        <input type="button" value=" * " onClick="add_val('*')"><br>
+        <input type="button" value=" C " onClick="clear_val()">
+        <input type="button" value=" 0 " onClick="add_val('0')">
+        <input type="button" value=" = " onClick="run_calc()">
+        <input type="button" value=" / " onClick="add_val('/')">
+    </form>
+    <hr>
+
+    <h3>Завдання 3. Динамічна матриця (Варіант 13)</h3>
+    <form id="main_form3">
+        Кількість рядків: <input type="text" id="t_str" value="4" size="5"><br>
+        Кількість стовпців: <input type="text" id="t_stb" value="4" size="5"><br><br>
+        <input type="button" value="Побудувати матрицю" onClick="fun_table()">
+        <input type="button" value="Розрахувати суму 3-го стовпця" onClick="fun_calc3()"><br><br>
+        <div id="matrix_div"></div>
+    </form>
+    <hr>
+
+    <h3>Завдання 4 та 5. Дослідження панелі DevTools (Console)</h3>
+    <p>Натисніть кнопки та відкрийте консоль браузера (клавіша F12):</p>
+    <input type="button" value="Запустити Завдання 4" onClick="test_task4()">
+    <input type="button" value="Запустити Завдання 5" onClick="test_task5()">
+    <hr>
+
+    <h3>Завдання 6 та 7. Обробка масиву імен у консолі</h3>
+    <p>Результати виводяться в консоль (клавіша F12):</p>
+    <input type="button" value="Запустити Завдання 6 (Hello/Goodbye)" onClick="test_task6()">
+    <input type="button" value="Запустити Завдання 7 (ASCII аналіз)" onClick="test_task7()">
+
+</body>
+</html>

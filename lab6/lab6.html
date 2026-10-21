@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота №6 — Кричун Антон</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f6f9;
+        }
+        .block {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        label {
+            display: inline-block;
+            width: 220px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 6px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 6px 12px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0052a3;
+        }
+        .result {
+            margin-top: 8px;
+            font-weight: bold;
+            color: #0066cc;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <p><a href="../index.html">← На головну сторінку</a></p>
+
+    <h1>Лабораторна робота №6</h1>
+    <p>Студент: Кричун Антон Дмитрович | Варіант: 13 </p>
+    <hr>
+
+    
+    <div class="block">
+        <h3>Завдання 1. Довжина рядка</h3>
+        <div class="form-group">
+            <label>Введіть рядок:</label>
+            <input type="text" id="t1_str" value="Привіт, світ!">
+            <button onclick="task1()">Обчислити</button>
+        </div>
+        <div id="t1_res" class="result"></div>
+    </div>
+
+
+    <div class="block">
+        <h3>Завдання 2. Зміна регістру</h3>
+        <div class="form-group">
+            <label>Введіть рядок:</label>
+            <input type="text" id="t2_str" value="Hello World">
+            <button onclick="task2()">Змінити регістр</button>
+        </div>
+        <div id="t2_res" class="result"></div>
+    </div>
+
+   
+    <div class="block">
+        <h3>Завдання 3. Пошук індексу символу</h3>
+        <div class="form-group">
+            <label>Рядок:</label>
+            <input type="text" id="t3_str" value="JavaScript">
+        </div>
+        <div class="form-group">
+            <label>Символ:</label>
+            <input type="text" id="t3_char" value="a" style="width: 50px;">
+            <button onclick="task3()">Знайти індекс</button>
+        </div>
+        <div id="t3_res" class="result"></div>
+    </div>
+
+  
+    <div class="block">
+        <h3>Завдання 4. Кількість входжень символу</h3>
+        <div class="form-group">
+            <label>Рядок:</label>
+            <input type="text" id="t4_str" value="hello world">
+        </div>
+        <div class="form-group">
+            <label>Символ:</label>
+            <input type="text" id="t4_char" value="o" style="width: 50px;">
+            <button onclick="task4()">Порахувати</button>
+        </div>
+        <div id="t4_res" class="result"></div>
+    </div>
+
+    
+    <div class="block">
+        <h3>Завдання 5. Обмін сусідніх символів</h3>
+        <div class="form-group">
+            <label>Введіть рядок:</label>
+            <input type="text" id="t5_str" value="abcdef">
+            <button onclick="task5()">Міняти місцями</button>
+        </div>
+        <div id="t5_res" class="result"></div>
+    </div>
+
+   
+    <div class="block">
+        <h3>Завдання 6. Перевірка на спам</h3>
+        <div class="form-group">
+            <label>Текст для перевірки:</label>
+            <input type="text" id="t6_str" value="Тільки сьогодні знижки 100% безкоштовно">
+            <button onclick="task6()">Перевірити</button>
+        </div>
+        <div id="t6_res" class="result"></div>
+    </div>
+
+    
+    <div class="block">
+        <h3>Завдання 7. Скорочення рядка (truncate)</h3>
+        <div class="form-group">
+            <label>Рядок:</label>
+            <input type="text" id="t7_str" value="Hello, world!">
+        </div>
+        <div class="form-group">
+            <label>Макс. довжина:</label>
+            <input type="number" id="t7_len" value="8" style="width: 60px;">
+            <button onclick="task7()">Скоротити</button>
+        </div>
+        <div id="t7_res" class="result"></div>
+    </div>
+
+    
+    <div class="block">
+        <h3>Завдання 8.3. Сортування слів за довжиною та алфавітом</h3>
+        <div class="form-group">
+            <label>Рядок слів:</label>
+            <input type="text" id="t8_str" value="apple banana cherry date">
+            <button onclick="task8()">Відсортувати</button>
+        </div>
+        <div id="t8_res" class="result"></div>
+    </div>
+
+    
+    <div class="block">
+        <h3>Завдання 9.3. Найчастіше повторювана буква</h3>
+        <div class="form-group">
+            <label>Введіть рядок:</label>
+            <input type="text" id="t9_str" value="apple pay">
+            <button onclick="task9()">Знайти букву</button>
+        </div>
+        <div id="t9_res" class="result"></div>
+    </div>
+
+   
+    <div class="block">
+        <h3>Завдання 10.3. Перевірка підрядка-паліндрому (мін. 3 символи)</h3>
+        <div class="form-group">
+            <label>Введіть рядок:</label>
+            <input type="text" id="t10_str" value="abcbad">
+            <button onclick="task10()">Перевірити</button>
+        </div>
+        <div id="t10_res" class="result"></div>
+    </div>
+
+    <script>
+        
+        function task1() {
+            let str = document.getElementById("t1_str").value;
+            document.getElementById("t1_res").innerText = "Довжина: " + str.length;
+        }
+
+       
+        function task2() {
+            let str = document.getElementById("t2_str").value;
+            document.getElementById("t2_res").innerHTML = 
+                "Верхній регістр: " + str.toUpperCase() + "<br>" +
+                "Нижній регістр: " + str.toLowerCase();
+        }
+
+        
+        function task3() {
+            let str = document.getElementById("t3_str").value;
+            let ch = document.getElementById("t3_char").value;
+            document.getElementById("t3_res").innerText = "Індекс першого входження: " + str.indexOf(ch);
+        }
+
+        
+        function task4() {
+            let str = document.getElementById("t4_str").value;
+            let ch = document.getElementById("t4_char").value;
+            let count = 0;
+            for (let i = 0; i < str.length; i++) {
+                if (str[i] === ch) count++;
+            }
+            document.getElementById("t4_res").innerText = "Кількість входжень: " + count;
+        }
+
+        
+        function task5() {
+            let str = document.getElementById("t5_str").value.split('');
+            for (let i = 0; i < str.length - 1; i += 2) {
+                let temp = str[i];
+                str[i] = str[i + 1];
+                str[i + 1] = temp;
+            }
+            document.getElementById("t5_res").innerText = "Результат: " + str.join('');
+        }
+
+        
+        function task6() {
+            let str = document.getElementById("t6_str").value.toLowerCase();
+            let spamWords = ["100% безкоштовно", "збільшення продажів", "тільки сьогодні", "не видаляйте"];
+            let hasSpam = spamWords.some(word => str.includes(word));
+            document.getElementById("t6_res").innerText = "Спам виявлено: " + hasSpam;
+        }
+
+        
+        function task7() {
+            let str = document.getElementById("t7_str").value;
+            let maxLen = parseInt(document.getElementById("t7_len").value);
+            let res = str;
+            if (str.length > maxLen) {
+                res = str.slice(0, maxLen - 3) + "...";
+            }
+            document.getElementById("t7_res").innerText = "Результат: " + res;
+        }
+
+        
+        function task8() {
+            let words = document.getElementById("t8_str").value.trim().split(/\s+/);
+            words.sort((a, b) => {
+                if (a.length !== b.length) return a.length - b.length;
+                return a.localeCompare(b);
+            });
+            document.getElementById("t8_res").innerText = "Результат: " + words.join(' ');
+        }
+
+        
+        function task9() {
+            let str = document.getElementById("t9_str").value.replace(/\s+/g, '');
+            let counts = {};
+            let maxChar = '', maxCount = 0;
+            for (let char of str) {
+                counts[char] = (counts[char] || 0) + 1;
+                if (counts[char] > maxCount) {
+                    maxCount = counts[char];
+                    maxChar = char;
+                }
+            }
+            document.getElementById("t9_res").innerText = "Найчастіша буква: " + maxChar + " (повторів: " + maxCount + ")";
+        }
+
+        
+        function task10() {
+            let str = document.getElementById("t10_str").value;
+            let found = false;
+            for (let i = 0; i < str.length; i++) {
+                for (let j = i + 3; j <= str.length; j++) {
+                    let sub = str.slice(i, j);
+                    let rev = sub.split('').reverse().join('');
+                    if (sub === rev) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) break;
+            }
+            document.getElementById("t10_res").innerText = "Результат: " + found;
+        }
+    </script>
+</body>
+</html>

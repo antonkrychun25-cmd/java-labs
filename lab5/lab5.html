@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота №5 — Кричун Антон</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f6f9;
+        }
+
+        .block {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-control {
+            width: 320px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        
+        .valid {
+            border: 2px solid green !important;
+            color: black !important;
+        }
+
+        .invalid {
+            border: 2px solid red !important;
+            color: red !important;
+        }
+
+        .status-msg {
+            margin-left: 10px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .status-msg.success {
+            color: green;
+        }
+
+        .status-msg.error {
+            color: red;
+        }
+
+        .btn-submit {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #0052a3;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <p><a href="../index.html">← На головну сторінку</a></p>
+
+    <h1>Лабораторна робота №5</h1>
+    <p>Студент: Кричун Антон Дмитрович | Варіант: 13</p>
+    <hr>
+
+    <
+    <div class="block">
+        <h3>Завдання 1. Розбір елементів e-mail через регулярний вираз</h3>
+        <p>Результати виконання <code>s.match(r)</code> для адреси <strong>dwbyu@mail.ua</strong>:</p>
+        <div id="task1_out" style="background: #fafafa; padding: 10px; border: 1px solid #eee;"></div>
+    </div>
+
+    
+    <div class="block">
+        <h3>Завдання 2.1 та 2.2. Валідація форми за допомогою регулярних виразів</h3>
+        <form id="valForm">
+
+            
+            <div class="form-group">
+                <label for="email">1. Адреса електронної пошти (e-mail):</label>
+                <input type="text" id="email" class="form-control" placeholder="anton.krychun.25@cnu.edu.ua">
+                <span id="email_status" class="status-msg"></span>
+            </div>
+
+            
+            <div class="form-group">
+                <label for="fullname">2. Ім’я та прізвище:</label>
+                <input type="text" id="fullname" class="form-control" placeholder="Антон КРИЧУН">
+                <span id="fullname_status" class="status-msg"></span>
+            </div>
+
+           
+            <div class="form-group">
+                <label for="login">3. Логін (тільки латина):</label>
+                <input type="text" id="login" class="form-control" placeholder="anton123">
+                <span id="login_status" class="status-msg"></span>
+            </div>
+
+           
+            <div class="form-group">
+                <label for="password">4. Пароль:</label>
+                <input type="password" id="password" class="form-control" placeholder="Password123!">
+                <span id="password_status" class="status-msg"></span>
+            </div>
+
+            
+            <div class="form-group">
+                <label for="zipcode">5. Поштовий індекс (5 цифр):</label>
+                <input type="text" id="zipcode" class="form-control" placeholder="58000">
+                <span id="zipcode_status" class="status-msg"></span>
+            </div>
+
+            <br>
+            <input type="button" class="btn-submit" value="Перевірити форму" onclick="validateForm()">
+        </form>
+    </div>
+
+    <script language="JavaScript">
+        
+        let s = "dwbyu@mail.ua";
+        let r = /^([a-z0-9]+)(\.[a-z0-9]+)*@([a-z0-9]+)(\.[a-z0-9]+)*$/i;
+        let a = s.match(r);
+        let outHtml = "";
+
+        if (a) {
+            for (let i = 0; i < a.length; i++) {
+                outHtml += "a[" + i + "]: " + a[i] + "<br><hr>";
+            }
+        } else {
+            outHtml = "Співпадінь не знайдено.";
+        }
+        document.getElementById("task1_out").innerHTML = outHtml;
+
+        
+        function validateField(inputId, statusId, regex, errorMsg) {
+            let inputElem = document.getElementById(inputId);
+            let statusElem = document.getElementById(statusId);
+            let val = inputElem.value.trim();
+
+            if (regex.test(val)) {
+                inputElem.className = "form-control valid";
+                statusElem.className = "status-msg success";
+                statusElem.innerHTML = "✔";
+                return true;
+            } else {
+                inputElem.className = "form-control invalid";
+                statusElem.className = "status-msg error";
+                statusElem.innerHTML = errorMsg;
+                return false;
+            }
+        }
+
+        function validateForm() {
+            
+            let emailRegex = /^[a-zA-Z0-9._%+-]+@cnu\.edu\.ua$/;
+            validateField("email", "email_status", emailRegex, "Емейл повинен містити @cnu.edu.ua в кінці!");
+
+            
+            let fullnameRegex = /^[A-ZА-ЯІЇЄ][a-zа-яіїє]+\s+[A-ZА-ЯІЇЄ]+$/;
+            validateField("fullname", "fullname_status", fullnameRegex, "Формат: Антон КРИЧУН!");
+
+            
+            let loginRegex = /^[a-zA-Z0-9]+$/;
+            validateField("login", "login_status", loginRegex, "Логін повинен містити тільки латинські літери!");
+
+            
+            let passwordRegex = /^(?=.*[a-zA-Zа-яА-Я])(?=.*\d)(?=.*[_\-!@#$%^&*]).{8,}$/;
+            validateField("password", "password_status", passwordRegex, "Мін. 8 символів, мін. 1 буква, 1 цифра і 1 спецсимвол!");
+
+            
+            let zipcodeRegex = /^\d{5}$/;
+            validateField("zipcode", "zipcode_status", zipcodeRegex, "Індекс повинен складатися з 5 цифр!");
+        }
+    </script>
+
+</body>
+</html>

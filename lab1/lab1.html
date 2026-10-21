@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота №1</title>
+    <script language="JavaScript">
+        
+        function calculation() {
+            let x = 2;
+            let y = 3;
+            let z = 2;
+            let F = Math.pow(x, y) + Math.pow(y, z) + Math.pow(z, x);
+            alert("F = " + F);
+        }
+
+        
+        function fun_select(msg) {
+            main_form3.t_res.value = msg;
+        }
+        function fun_mouseover(msg) {
+            main_form3.t_res.value = msg;
+        }
+
+        
+        function calc_branch() {
+            let x = parseFloat(main_form4.t_x.value);
+            let y = parseFloat(main_form4.t_y.value);
+            let F;
+
+            if (y > 3 && x > 0) {
+                F = 2 * Math.sqrt(x) * y;
+            } else if (((y * x * x / 2) > 3 * x) || (x * x > 2 * y)) {
+                F = x / (y * y);
+            } else {
+                F = (x * x) / y;
+            }
+
+            main_form4.t_f.value = F;
+        }
+
+       
+        function calc_series() {
+            let x = parseFloat(main_form5.t_x.value);
+            let y = parseFloat(main_form5.t_y.value);
+            let sum = 0;
+
+            for (let i = 6; i <= 12; i++) {
+                
+                let factorial = 1;
+                for (let j = 1; j <= i; j++) {
+                    factorial = factorial * j;
+                }
+
+                let term = Math.pow(-1, i) * (Math.pow(x, y) - Math.sqrt(x)) / factorial;
+                sum = sum + term;
+            }
+
+            main_form5.t_res.value = sum;
+        }
+
+        
+        let product = ["Альбом", "Авторучка", "Акварель", "Калькулятор", "Книга"];
+        let quantity = ["50", "120", "30", "15", "80"];
+        let cost = ["45.5", "15.0", "85.0", "250.0", "120.0"];
+        let selected_index = -1;
+
+       
+        function fun1() {
+            let name = form1.name_cont.value;
+            selected_index = -1;
+
+            for (let i = 0; i < product.length; i++) {
+                if (product[i] == name) {
+                    selected_index = i;
+                    break;
+                }
+            }
+
+            if (selected_index != -1) {
+                form1.output_density.value = quantity[selected_index];
+                form1.output_area.value = cost[selected_index];
+            } else {
+                form1.output_density.value = "Товар не знайдено";
+                form1.output_area.value = "Товар не знайдено";
+            }
+        }
+
+        
+        function fun2() {
+            if (selected_index != -1) {
+                let total = quantity[selected_index] * cost[selected_index];
+                alert("Загальна вартість товару " + product[selected_index] + ": " + total + " грн.");
+            } else {
+                alert("Спочатку знайдіть товар!");
+            }
+        }
+
+        
+        function fun1_select() {
+            let select_elem = document.getElementById("prod_select");
+            selected_index = select_elem.value;
+
+            if (selected_index != -1) {
+                form2.output_qty7.value = quantity[selected_index];
+                form2.output_cost7.value = cost[selected_index];
+            } else {
+                form2.output_qty7.value = "";
+                form2.output_cost7.value = "";
+            }
+        }
+
+        function fun2_select() {
+            if (selected_index != -1) {
+                let total = quantity[selected_index] * cost[selected_index];
+                alert("Загальна вартість товару: " + total + " грн.");
+            } else {
+                alert("Оберіть товар зі списку!");
+            }
+        }
+
+       
+        window.onload = function() {
+            let select_elem = document.getElementById("prod_select");
+            for (let i = 0; i < product.length; i++) {
+                let opt = document.createElement("option");
+                opt.value = i;
+                opt.text = product[i];
+                select_elem.add(opt);
+            }
+        };
+    </script>
+</head>
+<body>
+
+    
+    <p><a href="../index.html">← На головну сторінку</a></p>
+
+    <h1>Лабораторна робота №1</h1>
+    <p>Студент: Кричун Антон Дмитрович | Варіант: 13</p>
+    <hr>
+
+    <h3>Завдання 1.</h3>
+    <p>Це звичайний HTML абзац.</p>
+    <script language="JavaScript">
+        document.write("Привіт! Мене звати Кричун Антон Дмитрович, студент групи 341-Б.");
+    </script>
+    <p>Знову звичайний HTML абзац.</p>
+    <form>
+        <input type="button" value="Click me" onClick="alert('Я народився 13.10.2006 року в місті Чернівці')">
+    </form>
+    <hr>
+
+    <h3>Завдання 2.</h3>
+    <form>
+        <input type="button" value="Calculate" onClick="calculation()">
+    </form>
+    <hr>
+
+    <h3>Завдання 3.</h3>
+    <form name="main_form3">
+        Текст 1 (виділіть текст або наведіть мишку):<br>
+        <input type="text" size="60" value="Текст для перевірки подій" onSelect="fun_select('Відбулась подія onSelect')" onMouseOver="fun_mouseover('Відбулась подія onMouseOver')"><br><br>
+        Текст 2 (результат):<br>
+        <input type="text" size="60" name="t_res"><br>
+    </form>
+    <hr>
+
+    <h3>Завдання 4.</h3>
+    <form name="main_form4">
+        x = <input type="text" name="t_x" value="4"><br>
+        y = <input type="text" name="t_y" value="2"><br>
+        F = <input type="text" name="t_f"><br><br>
+        <input type="button" value="Розрахувати" onClick="calc_branch()">
+    </form>
+    <hr>
+
+    <h3>Завдання 5.</h3>
+    <form name="main_form5">
+        x = <input type="text" name="t_x" value="4"><br>
+        y = <input type="text" name="t_y" value="2"><br>
+        Результат = <input type="text" name="t_res" size="40"><br><br>
+        <input type="button" value="Розрахувати" onClick="calc_series()">
+    </form>
+    <hr>
+
+    <h3>Завдання 6.</h3>
+    <form name="form1">
+        Введіть назву товару (Альбом, Авторучка, Акварель, Калькулятор, Книга):<br>
+        <input type="text" name="name_cont"><br>
+        <input type="button" value="Наявна кількість і вартість" onClick="fun1()"><br><br>
+        Кількість: <input type="text" size="30" name="output_density"><br>
+        Вартість: <input type="text" size="30" name="output_area"><br><br>
+        <input type="button" value="Загальна сума" onClick="fun2()">
+    </form>
+    <hr>
+
+    <h3>Завдання 7.</h3>
+    <form name="form2">
+        Оберіть товар зі списку:<br>
+        <select id="prod_select" onChange="fun1_select()">
+            <option value="-1">-- Оберіть товар --</option>
+        </select><br><br>
+        Кількість: <input type="text" size="30" name="output_qty7"><br>
+        Вартість: <input type="text" size="30" name="output_cost7"><br><br>
+        <input type="button" value="Загальна сума" onClick="fun2_select()">
+    </form>
+
+</body>
+</html>

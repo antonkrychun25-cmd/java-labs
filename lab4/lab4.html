@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота №4 — Кричун Антон</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f6f9;
+        }
+
+        
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .burger-icon {
+            font-size: 24px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .nav-links {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links.active {
+            max-height: 200px;
+            margin-top: 10px;
+        }
+
+        .nav-links li {
+            padding: 8px 0;
+            border-bottom: 1px solid #555;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+       
+        .tab-buttons {
+            display: flex;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            background-color: #e0e0e0;
+            margin-right: 5px;
+            font-weight: bold;
+        }
+
+        
+        .tab-btn.active {
+            background-color: #ffffff;
+            border-top: 2px solid #0066cc;
+        }
+
+        .tab-content {
+            display: none;
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        
+        .question-block {
+            background-color: #fafafa;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .question-block h4 {
+            margin-top: 0;
+        }
+
+        table.result-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table.result-table th, table.result-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        table.result-table th {
+            background-color: #eef4fb;
+        }
+
+        .total-score {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0056b3;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <p><a href="../index.html">← На головну сторінку</a></p>
+
+    <h1>Лабораторна робота №4</h1>
+    <p>Студент: Кричун Антон Дмитрович | Варіант: 13</p>
+
+   
+    <div class="navbar">
+        <div class="burger-icon" onclick="toggleMenu()">☰ Меню навігації</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="../index.html">Головна сторінка</a></li>
+            <li><a href="#test-section">Тестування</a></li>
+            <li><a href="#theory-section">Теоретичні відомості</a></li>
+        </ul>
+    </div>
+
+  
+    <div class="tab-buttons">
+        <button class="tab-btn active" onclick="openTab('test_tab', this)">Тестування</button>
+        <button class="tab-btn" onclick="openTab('theory_tab', this)">Теоретичні відомості</button>
+    </div>
+
+    
+    <div id="test_tab" class="tab-content active">
+        <h3>Тест з основ JavaScript</h3>
+        <form id="quizForm">
+
+           
+            <div class="question-block">
+                <h4>1. Який тег використовується для підключення JavaScript? (Radio)</h4>
+                <label><input type="radio" name="q1" value="1"> &lt;script&gt;</label><br>
+                <label><input type="radio" name="q1" value="-1"> &lt;js&gt;</label><br>
+                <label><input type="radio" name="q1" value="-1"> &lt;javascript&gt;</label><br>
+                <label><input type="radio" name="q1" value="-1"> &lt;code&gt;</label>
+            </div>
+
+            
+            <div class="question-block">
+                <h4>2. Яка функція виводить модальне вікно з повідомленням? (Radio)</h4>
+                <label><input type="radio" name="q2" value="-1"> console.log()</label><br>
+                <label><input type="radio" name="q2" value="1"> alert()</label><br>
+                <label><input type="radio" name="q2" value="-1"> document.write()</label><br>
+                <label><input type="radio" name="q2" value="-1"> prompt()</label>
+            </div>
+
+            
+            <div class="question-block">
+                <h4>3. Оберіть ключові слова для оголошення змінних: (Checkbox - 2 правильні)</h4>
+                <label><input type="checkbox" name="q3" value="1"> let</label><br>
+                <label><input type="checkbox" name="q3" value="1"> const</label><br>
+                <label><input type="checkbox" name="q3" value="-1"> integer</label><br>
+                <label><input type="checkbox" name="q3" value="-1"> string</label>
+            </div>
+
+           
+            <div class="question-block">
+                <h4>4. Які типи даних є в JavaScript? (Checkbox - 3 правильні)</h4>
+                <label><input type="checkbox" name="q4" value="1"> number</label><br>
+                <label><input type="checkbox" name="q4" value="1"> string</label><br>
+                <label><input type="checkbox" name="q4" value="1"> boolean</label><br>
+                <label><input type="checkbox" name="q4" value="-1"> float32</label>
+            </div>
+
+           
+            <div class="question-block">
+                <h4>5. Який оператор використовується для суворого порівняння за значенням і типом? (Select одинарний)</h4>
+                <select id="q5_select">
+                    <option value="0">-- Оберіть відповідь --</option>
+                    <option value="-1">=</option>
+                    <option value="-1">==</option>
+                    <option value="1">===</option>
+                    <option value="-1">!=</option>
+                </select>
+            </div>
+
+          
+            <div class="question-block">
+                <h4>6. Оберіть методи роботи з елементами DOM: (Select множинний - утримуйте Ctrl/Cmd, 3 правильні)</h4>
+                <select id="q6_select" multiple size="4">
+                    <option value="1">getElementById</option>
+                    <option value="1">querySelector</option>
+                    <option value="1">querySelectorAll</option>
+                    <option value="-1">fetchDatabase</option>
+                </select>
+            </div>
+
+            
+            <div class="question-block">
+                <h4>7. Введіть назву методу для додавання обробника подій (без дужок): (Text input)</h4>
+                <input type="text" id="q7_text" placeholder="Наприклад: addEventListener">
+            </div>
+
+            <br>
+            <input type="button" value="Завершити тестування" onclick="calculateTestResults()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
+        </form>
+
+       
+        <div id="resultBlock"></div>
+    </div>
+
+    
+    <div id="theory_tab" class="tab-content">
+        <h3>Теоретичні відомості з матеріалу тесту</h3>
+        <p><strong>1. JavaScript у вебдокументі:</strong> Код JS додається на HTML-сторінку за допомогою тегу <code>&lt;script&gt;</code>.</p>
+        <p><strong>2. Змінні:</strong> У сучасному JavaScript для оголошення змінних використовуються ключові слова <code>let</code> (змінна) та <code>const</code> (константа).</p>
+        <p><strong>3. Повідомлення:</strong> Функція <code>alert()</code> відображає модальне вікно з повідомленням та кнопкою ОК.</p>
+        <p><strong>4. Порівняння:</strong> Оператор <code>===</code> виконує суворе порівняння значень з урахуванням типу даних (наприклад, <code>5 === "5"</code> поверне <code>false</code>).</p>
+        <p><strong>5. DOM та Події:</strong> Метод <code>addEventListener()</code> дозволяє призначити обробник подій на елемент без зміни HTML-коду.</p>
+    </div>
+
+    <script language="JavaScript">
+        
+        function toggleMenu() {
+            let navLinks = document.getElementById("navLinks");
+            navLinks.classList.toggle("active");
+        }
+
+        
+        function openTab(tabId, btnElem) {
+            let contents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+
+            let buttons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+
+            document.getElementById(tabId).classList.add("active");
+            btnElem.classList.add("active");
+        }
+
+        
+        function calculateTestResults() {
+            let form = document.forms.quizForm;
+            let questionsText = [
+                "1. Тег для підключення JS",
+                "2. Модальне вікно alert()",
+                "3. Ключові слова змінних (2 прав.)",
+                "4. Типи даних в JS (3 прав.)",
+                "5. Суворе порівняння (===)",
+                "6. Методи DOM (3 прав.)",
+                "7. Метод додавання подій"
+            ];
+
+            let selectedAnswers = [];
+            let scores = [];
+
+           
+            let q1_ans = "Не обрано";
+            let q1_score = 0;
+            for (let i = 0; i < form.q1.length; i++) {
+                if (form.q1[i].checked) {
+                    q1_score = parseFloat(form.q1[i].value);
+                    q1_ans = form.q1[i].parentNode.innerText.trim();
+                }
+            }
+            if (q1_score < 0) q1_score = 0;
+            selectedAnswers.push(q1_ans);
+            scores.push(q1_score);
+
+            
+            let q2_ans = "Не обрано";
+            let q2_score = 0;
+            for (let i = 0; i < form.q2.length; i++) {
+                if (form.q2[i].checked) {
+                    q2_score = parseFloat(form.q2[i].value);
+                    q2_ans = form.q2[i].parentNode.innerText.trim();
+                }
+            }
+            if (q2_score < 0) q2_score = 0;
+            selectedAnswers.push(q2_ans);
+            scores.push(q2_score);
+
+            
+            let q3_ans_arr = [];
+            let q3_score = 0;
+            for (let i = 0; i < form.q3.length; i++) {
+                if (form.q3[i].checked) {
+                    q3_score += parseFloat(form.q3[i].value);
+                    q3_ans_arr.push(form.q3[i].parentNode.innerText.trim());
+                }
+            }
+            if (q3_score < 0) q3_score = 0; 
+            selectedAnswers.push(q3_ans_arr.length > 0 ? q3_ans_arr.join(", ") : "Нічого не обрано");
+            scores.push(q3_score);
+
+            
+            let q4_ans_arr = [];
+            let q4_score = 0;
+            for (let i = 0; i < form.q4.length; i++) {
+                if (form.q4[i].checked) {
+                    q4_score += parseFloat(form.q4[i].value);
+                    q4_ans_arr.push(form.q4[i].parentNode.innerText.trim());
+                }
+            }
+            if (q4_score < 0) q4_score = 0; 
+            selectedAnswers.push(q4_ans_arr.length > 0 ? q4_ans_arr.join(", ") : "Нічого не обрано");
+            scores.push(q4_score);
+
+           
+            let q5Elem = document.getElementById("q5_select");
+            let q5_score = parseFloat(q5Elem.value);
+            let q5_ans = q5Elem.options[q5Elem.selectedIndex].text;
+            if (q5Elem.value == "0") q5_ans = "Не обрано";
+            if (q5_score < 0) q5_score = 0;
+            selectedAnswers.push(q5_ans);
+            scores.push(q5_score);
+
+            
+            let q6Elem = document.getElementById("q6_select");
+            let q6_score = 0;
+            let q6_ans_arr = [];
+            for (let i = 0; i < q6Elem.options.length; i++) {
+                if (q6Elem.options[i].selected) {
+                    q6_score += parseFloat(q6Elem.options[i].value);
+                    q6_ans_arr.push(q6Elem.options[i].text);
+                }
+            }
+            if (q6_score < 0) q6_score = 0; 
+            selectedAnswers.push(q6_ans_arr.length > 0 ? q6_ans_arr.join(", ") : "Нічого не обрано");
+            scores.push(q6_score);
+
+            
+            let q7Val = document.getElementById("q7_text").value.trim().toLowerCase();
+            let q7_score = 0;
+            let q7_ans = q7Val != "" ? q7Val : "Порожньо";
+            if (q7Val === "addeventlistener") {
+                q7_score = 1;
+            } else if (q7Val != "") {
+                q7_score = -1;
+            }
+            if (q7_score < 0) q7_score = 0;
+            selectedAnswers.push(q7_ans);
+            scores.push(q7_score);
+
+            
+            let totalScore = 0;
+            for (let i = 0; i < scores.length; i++) {
+                totalScore += scores[i];
+            }
+
+            
+            let tableHtml = "<h3>Результати тестування:</h3>";
+            tableHtml += "<table class='result-table'>";
+            tableHtml += "<tr><th>№</th><th>Запитання</th><th>Обрана відповідь</th><th>Бал</th></tr>";
+
+            for (let i = 0; i < questionsText.length; i++) {
+                tableHtml += "<tr>";
+                tableHtml += "<td>" + (i + 1) + "</td>";
+                tableHtml += "<td>" + questionsText[i] + "</td>";
+                tableHtml += "<td>" + selectedAnswers[i] + "</td>";
+                tableHtml += "<td>" + scores[i] + "</td>";
+                tableHtml += "</tr>";
+            }
+
+            tableHtml += "</table>";
+            tableHtml += "<div class='total-score'>Загальний сумарний бал: " + totalScore + " / 10</div>";
+
+            document.getElementById("resultBlock").innerHTML = tableHtml;
+        }
+    </script>
+
+</body>
+</html>

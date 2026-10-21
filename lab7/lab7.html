@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота №7 — Кричун Антон</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f6f9;
+        }
+        .block {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        label {
+            display: inline-block;
+            width: 250px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 6px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 6px 12px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        button:hover {
+            background-color: #0052a3;
+        }
+        .btn-clear {
+            background-color: #cc0000;
+        }
+        .btn-clear:hover {
+            background-color: #a30000;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #0066cc;
+        }
+    </style>
+</head>
+<body>
+
+    <p><a href="../index.html">← На головну сторінку</a></p>
+
+    <h1>Лабораторна робота №7</h1>
+    <p>Студент: Кричун Антон Дмитрович | Варіант: 13 (3)</p>
+    <hr>
+
+    <div class="block">
+        <h3>Завдання 1. Об'єкт Час</h3>
+        <button onclick="showCurrentTime()">1.1 Показати поточний час</button>
+        <div id="t1_time" class="result"></div>
+        <br>
+        <div class="form-group">
+            <label>Додати секунди:</label>
+            <input type="number" id="add_sec_input" value="30">
+            <button onclick="addSecondsToTime()">1.2 Змінити час</button>
+        </div>
+        <div id="t1_res" class="result"></div>
+    </div>
+
+    <div class="block">
+        <h3>Завдання 2. Робота з датами</h3>
+        <p>Завдання 2.1. Виведення поточної дати, дня тижня і часу</p>
+        <button onclick="showFullDate()">Виконати</button>
+        <div id="t2_1_res" class="result"></div>
+        <br>
+        <h4>2.2 Останній день місяця</h4>
+        <div class="form-group">
+            <label>Рік:</label>
+            <input type="number" id="t2_year" value="2025">
+        </div>
+        <div class="form-group">
+            <label>Місяць (1-12):</label>
+            <input type="number" id="t2_month" value="2">
+            <button onclick="getLastDay()">Визначити день</button>
+        </div>
+        <div id="t2_2_res" class="result"></div>
+        <br>
+        <h4>2.3 Секунди дня</h4>
+        <button onclick="getDaySeconds()">Обчислити секунди</button>
+        <div id="t2_3_res" class="result"></div>
+    </div>
+
+    <div class="block">
+        <h3>Завдання 3 та 4. Класи Car та ElectricCar</h3>
+        <button onclick="testCarClasses()">Продемонструвати</button>
+        <div id="t3_4_res" class="result"></div>
+    </div>
+
+    <div class="block">
+        <h3>Завдання 5. Статичний метод</h3>
+        <button onclick="testStaticMethod()">Обчислити (5 + 7)</button>
+        <div id="t5_res" class="result"></div>
+    </div>
+
+    <div class="block">
+        <h3>Завдання 6 (Варіант 3). Класи Rectangle та Square</h3>
+        <div class="form-group">
+            <label>Ширина прямокутника (width):</label>
+            <input type="number" id="rect_w" value="10">
+        </div>
+        <div class="form-group">
+            <label>Висота прямокутника (height):</label>
+            <input type="number" id="rect_h" value="5">
+        </div>
+        <div class="form-group">
+            <label>Сторона квадрата (side):</label>
+            <input type="number" id="sq_s" value="4">
+        </div>
+        <button onclick="showClassInfo()">Показати інформацію</button>
+        <button class="btn-clear" onclick="clearClassForm()">Очистити поля</button>
+        <div id="t6_res" class="result"></div>
+    </div>
+
+    <script>
+        let timeObj = {
+            hours: 20,
+            minutes: 30,
+            seconds: 45
+        };
+
+        function showCurrentTime() {
+            let now = new Date();
+            let h = String(now.getHours()).padStart(2, '0');
+            let m = String(now.getMinutes()).padStart(2, '0');
+            let s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById("t1_time").innerText = `Поточний час: ${h}:${m}:${s}`;
+        }
+
+        function addSecondsToTime() {
+            let secToAdd = parseInt(document.getElementById("add_sec_input").value) || 0;
+            let totalSec = timeObj.hours * 3600 + timeObj.minutes * 60 + timeObj.seconds + secToAdd;
+            
+            totalSec = (totalSec % 86400 + 86400) % 86400;
+            
+            let h = Math.floor(totalSec / 3600);
+            let m = Math.floor((totalSec % 3600) / 60);
+            let s = totalSec % 60;
+
+            let resStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            document.getElementById("t1_res").innerText = `Початковий: 20:30:45 + ${secToAdd} сек. = ${resStr}`;
+        }
+
+        function showFullDate() {
+            let days = ["неділя", "понеділок", "вівторок", "середа", "четвер", "п'ятниця", "субота"];
+            let months = ["січня", "лютого", "березня", "квітня", "травня", "червня", "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"];
+            
+            let d = new Date();
+            let dayName = days[d.getDay()];
+            let monthName = months[d.getMonth()];
+            let h = String(d.getHours()).padStart(2, '0');
+            let m = String(d.getMinutes()).padStart(2, '0');
+
+            document.getElementById("t2_1_res").innerHTML = 
+                `Дата: ${d.getDate()} ${monthName} ${d.getFullYear()} року<br>` +
+                `День тижня: ${dayName}<br>` +
+                `Час: ${h}:${m}`;
+        }
+
+        function getLastDay() {
+            let y = parseInt(document.getElementById("t2_year").value);
+            let m = parseInt(document.getElementById("t2_month").value);
+            let lastDay = new Date(y, m, 0).getDate();
+            document.getElementById("t2_2_res").innerText = `Останній день місяця: ${lastDay}`;
+        }
+
+        function getDaySeconds() {
+            let now = new Date();
+            let startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            let passedSec = Math.floor((now - startOfDay) / 1000);
+            let leftSec = 86400 - passedSec;
+
+            document.getElementById("t2_3_res").innerHTML = 
+                `Пройшло від початку дня: ${passedSec} сек.<br>` +
+                `Залишилось до наступного дня: ${leftSec} сек.`;
+        }
+
+        class Car {
+            constructor(brand, model, year) {
+                this.brand = brand;
+                this.model = model;
+                this.year = year;
+            }
+            info() {
+                return `Авто: ${this.brand} ${this.model}, ${this.year} року.`;
+            }
+        }
+
+        class ElectricCar extends Car {
+            constructor(brand, model, year, battery) {
+                super(brand, model, year);
+                this.battery = battery;
+            }
+            charge() {
+                return `${this.brand} ${this.model} заряджається... Батарея: ${this.battery} kWh`;
+            }
+        }
+
+        function testCarClasses() {
+            let tesla = new ElectricCar("Tesla", "Model 3", 2022, 75);
+            document.getElementById("t3_4_res").innerHTML = tesla.info() + "<br>" + tesla.charge();
+        }
+
+        class MathHelper {
+            static add(a, b) {
+                return a + b;
+            }
+        }
+
+        function testStaticMethod() {
+            document.getElementById("t5_res").innerText = "Результат MathHelper.add(5, 7): " + MathHelper.add(5, 7);
+        }
+
+        class Rectangle {
+            static defaultName = "Геометрична фігура";
+
+            constructor(width, height) {
+                this.width = width;
+                this.height = height;
+            }
+            getArea() {
+                return this.width * this.height;
+            }
+            getPerimeter() {
+                return 2 * (this.width + this.height);
+            }
+        }
+
+        class Square extends Rectangle {
+            constructor(side) {
+                super(side, side);
+            }
+            checkSidesEqual() {
+                return this.width === this.height;
+            }
+        }
+
+        function showClassInfo() {
+            let w = parseFloat(document.getElementById("rect_w").value) || 0;
+            let h = parseFloat(document.getElementById("rect_h").value) || 0;
+            let s = parseFloat(document.getElementById("sq_s").value) || 0;
+
+            let rect = new Rectangle(w, h);
+            let sq = new Square(s);
+
+            document.getElementById("t6_res").innerHTML = 
+                `<strong>Категорія (Статичне поле):</strong> ${Rectangle.defaultName}<br><br>` +
+                `<strong>Прямокутник (${w}x${h}):</strong><br>` +
+                `Площа: ${rect.getArea()}, Периметр: ${rect.getPerimeter()}<br><br>` +
+                `<strong>Квадрат (сторона ${s}):</strong><br>` +
+                `Площа: ${sq.getArea()}, Периметр: ${sq.getPerimeter()}<br>` +
+                `Всі сторони рівні: ${sq.checkSidesEqual()}`;
+        }
+
+        function clearClassForm() {
+            document.getElementById("rect_w").value = "";
+            document.getElementById("rect_h").value = "";
+            document.getElementById("sq_s").value = "";
+            document.getElementById("t6_res").innerHTML = "";
+        }
+    </script>
+</body>
+</html>

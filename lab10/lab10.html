@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота №10 — Кричун Антон (Варіант 3)</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f6f9; }
+        .block { background-color: #ffffff; border: 1px solid #ccc; padding: 15px 20px; margin-bottom: 20px; border-radius: 6px; }
+        button { padding: 8px 14px; background-color: #0066cc; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #0052a3; }
+        pre { background-color: #1e293b; color: #38bdf8; padding: 12px; border-radius: 6px; overflow-x: auto; font-family: monospace; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <p><a href="../index.html">← На головну сторінку</a></p>
+    <h1>Лабораторна робота №10 </h1>
+    <p>Студент: Кричун Антон Дмитрович  Варіант: 3 </p>
+    <hr>
+    <div class="block">
+        <h3>Завдання 1. Інкапсуляція — Student (task10_1.ts)</h3>
+        <button onclick="runTask1()">Запустити task10_1.js</button>
+        <pre id="out1">Натисніть кнопку для виконання...</pre>
+    </div>
+    <div class="block">
+        <h3>Завдання 2. Абстрактні класи та поліморфізм — CourseModule (task10_2.ts)</h3>
+        <button onclick="runTask2()">Запустити task10_2.js</button>
+        <pre id="out2">Натисніть кнопку для виконання...</pre>
+    </div>
+    <div class="block">
+        <h3>Завдання 3. Декоратор методу — @LogExecutionTime (task10_3.ts)</h3>
+        <button onclick="runTask3()">Запустити task10_3.js</button>
+        <pre id="out3">Натисніть кнопку для виконання...</pre>
+    </div>
+    <div class="block">
+        <h3>Завдання 4. Фабрика декораторів — @MinLength (task10_4.ts)</h3>
+        <button onclick="runTask4()">Запустити task10_4.js</button>
+        <pre id="out4">Натисніть кнопку для виконання...</pre>
+    </div>
+    <script>
+        function runTask1() {
+            document.getElementById("out1").innerText = "[ST-34113] Антон Кричун отримав(ла) оцінку 96. Оновлений GPA: 93\n[Помилка] Некоректний середній бал (120). Допустимі межі: 0–100.\nПідсумковий GPA студента (ST-34113): 94.5";
+        }
+        function runTask2() {
+            document.getElementById("out2").innerText = '[Іспит] "Веб-програмування та TypeScript" (5 кредити) — Поточні: 56, Екзамен: 38\nПідсумковий бал за модуль: 94 / 100\n\n[Курсова робота] "Об\'єктно-орієнтоване проєктування" (4 кредити) — Код: 95, Захист: 90\nПідсумковий бал за модуль: 93 / 100';
+        }
+        function runTask3() {
+            document.getElementById("out3").innerText = "[LOG] Початок виконання 'calculateStreamRating' з аргументами: [ 2000000 ]\n[LOG] Метод 'calculateStreamRating' виконано за 18.420 мс\nСередній рейтинговий бал потоку: 50.00";
+        }
+        function runTask4() {
+            document.getElementById("out4").innerText = 'Зареєстровано студента: Антон Кричун\nСпроба зареєструвати студента із закоротким ім\'ям...\nОтримано виключення: Помилка валідації! Поле \'firstName\' повинно містити мінімум 3 символів. Передано: "Ян"';
+        }
+    </script>
+</body>
+</html>

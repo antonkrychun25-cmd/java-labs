@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота №9 — Кричун Антон</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f6f9;
+        }
+        .block {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+        button {
+            padding: 8px 14px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0052a3;
+        }
+        pre {
+            background-color: #1e293b;
+            color: #38bdf8;
+            padding: 12px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: monospace;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <p><a href="../index.html">← На головну сторінку</a></p>
+
+    <h1>Лабораторна робота №9 (TypeScript)</h1>
+    <p>Студент: Кричун Антон Дмитрович | Група: ІПЗ-22 </p>
+    <hr>
+
+    <div class="block">
+        <h3>Завдання 1. Базові типи даних (task9_1.ts)</h3>
+        <button onclick="runTask1()">Запустити task9_1.js</button>
+        <pre id="out1">Натисніть кнопку для виконання...</pre>
+    </div>
+
+    <div class="block">
+        <h3>Завдання 2. Інтерфейси та фільтрація (task9_2.ts)</h3>
+        <button onclick="runTask2()">Запустити task9_2.js</button>
+        <pre id="out2">Натисніть кнопку для виконання...</pre>
+    </div>
+
+    <div class="block">
+        <h3>Завдання 3. Enums та Union Types (task9_3.ts)</h3>
+        <button onclick="runTask3()">Запустити task9_3.js</button>
+        <pre id="out3">Натисніть кнопку для виконання...</pre>
+    </div>
+
+    <div class="block">
+        <h3>Завдання 4. Generics та DataStorage&lt;T&gt; (task9_4.ts)</h3>
+        <button onclick="runTask4()">Запустити task9_4.js</button>
+        <pre id="out4">Натисніть кнопку для виконання...</pre>
+    </div>
+
+    <script>
+        function runTask1() {
+            const studentName = "Антон Кричун";
+            const studentAge = 19;
+            const isEnrolled = true;
+            const grades = [95, 88, 92, 90, 96];
+            const sum = grades.reduce((acc, curr) => acc + curr, 0);
+            const averageGrade = sum / grades.length;
+
+            document.getElementById("out1").innerText =
+                `Студент: ${studentName}, Вік: ${studentAge}\n` +
+                `Активний студент: ${isEnrolled}\n` +
+                `Середній бал: ${averageGrade.toFixed(2)}`;
+        }
+
+        function runTask2() {
+            const catalog = [
+                { id: 1, title: "Ноутбук", price: 28000, isAvailable: true, category: "Електроніка" },
+                { id: 2, title: "Мишка", price: 650, isAvailable: true },
+                { id: 3, title: "Клавіатура", price: 1800, isAvailable: false, category: "Периферія" },
+                { id: 4, title: "Монітор", price: 7500, isAvailable: true, category: "Електроніка" }
+            ];
+            const budgetProducts = catalog.filter(p => p.isAvailable && p.price <= 8000);
+            document.getElementById("out2").innerText =
+                "Доступні товари у вашому бюджеті:\n" + JSON.stringify(budgetProducts, null, 2);
+        }
+
+        function runTask3() {
+            const OrderStatus = {
+                Pending: "PENDING",
+                Processing: "PROCESSING",
+                Shipped: "SHIPPED"
+            };
+            const myOrder = { id: "ORD-9921", customer: "Антон Кричун", status: OrderStatus.Pending };
+            let log = "";
+            myOrder.status = OrderStatus.Processing;
+            log += `Замовлення #${myOrder.id} змінило статус на: ${myOrder.status}\n`;
+            myOrder.status = OrderStatus.Shipped;
+            log += `Замовлення #${myOrder.id} змінило статус на: ${myOrder.status}`;
+            document.getElementById("out3").innerText = log;
+        }
+
+        function runTask4() {
+            let log = "";
+            log += `[Storage] Елемент з ID=101 успішно додано.\n`;
+            log += `[Storage] Елемент з ID=102 успішно додано.\n`;
+            log += `Знайдений користувач: ${JSON.stringify({ id: 101, name: "Антон", email: "anton.krychun.25@cnu.edu.ua" })}\n`;
+            log += `[Storage] Елемент з ID=theme успішно додано.\n`;
+            log += `[Storage] Елемент з ID=lang успішно додано.\n`;
+            log += `Всі налаштування: ${JSON.stringify([
+                { id: "theme", key: "darkMode", value: true },
+                { id: "lang", key: "language", value: "uk-UA" }
+            ], null, 2)}`;
+            document.getElementById("out4").innerText = log;
+        }
+    </script>
+</body>
+</html>
